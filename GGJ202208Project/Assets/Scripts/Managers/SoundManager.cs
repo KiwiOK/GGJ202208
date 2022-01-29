@@ -8,20 +8,22 @@ public class SoundController : MonoBehaviour
     [SerializeField]
     private AudioClip _MusicAudio;
     [SerializeField]
+    private AudioClip _NigthmareMusic;
+    [SerializeField]
     private AudioClip _BadObjectAudio;
     [SerializeField]
     private AudioClip _GoodObjectAudio;
 
 
-    private AudioSource m_Music;
+    private AudioSource _Music;
 
     //starts and plays only the music clip on loop
     void Start()
     {
-        m_Music = GetComponent<AudioSource>();
-        m_Music.clip = _MusicAudio;
-        m_Music.loop = true;
-        m_Music.volume = 0.2f;
+        _Music = GetComponent<AudioSource>();
+        _Music.clip = _MusicAudio;
+        _Music.loop = true;
+        _Music.volume = 0.2f;
 
         DontDestroyOnLoad(this.gameObject);
         PlayMusic();
@@ -29,8 +31,15 @@ public class SoundController : MonoBehaviour
 
     private void PlayMusic()
     {
-        m_Music.Play();
+        _Music.clip = _MusicAudio;
+        _Music.Play();
     }
+    private void PlayNigthmareMusic()
+    {
+        _Music.clip = _MusicAudio;
+        _Music.Play();
+    }
+
 
     public void BadObjectSound(AudioSource source)
     {
