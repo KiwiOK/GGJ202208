@@ -80,10 +80,6 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + limite);
         }
     }
-    void jump()
-    {
-
-    }
     public void subLive(int quantity)
     {
         if (live > 0 && live < 3)
@@ -92,6 +88,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         //Llamar a muerte
+        //SceneManager.LoadScene(Muerte, LoadSceneMode.Single);
     }
     public int LiveGetter() { return live; }
     public void LiveSetter(int _live) { live = live;}
