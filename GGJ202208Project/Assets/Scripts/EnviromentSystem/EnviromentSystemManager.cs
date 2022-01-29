@@ -50,6 +50,6 @@ public class EnviromentSystemManager : MonoBehaviour
         _timeSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
         _timerBetweenSpawns = 0;
 
-        print("_timeSpawn: " + _timeSpawn);
+        //print("_timeSpawn: " + _timeSpawn);
     }
 }

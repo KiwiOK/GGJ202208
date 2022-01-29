@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float velUp = 3, velDownDiff = 0.2f;
     private float vel, jumpPos, posIni, posUp, velDown;
     private int aux = 1;
-    private int maxLive, currentLifes;
+    private int lifesLimit, maxLifes, currentLifes, minLifes;
     private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
@@ -30,11 +30,21 @@ public class PlayerController : MonoBehaviour
         vel = velUp;
         //live = 3;
     }
-    public void SetLifes(int l)
+
+    public void SetLifesLimit(int max)
     {
-        maxLive = l;
-        currentLifes = l;
+        maxLifes = max;
+        currentLifes = max;
+
     }
+
+    public void SetLifesLimit(int max, int min)
+    {
+        maxLifes = max;
+        minLifes = min;
+        currentLifes = 0;
+    }
+
     public void SetPosition(Vector3 pos)
     {
         transform.position = pos;
@@ -46,11 +56,10 @@ public class PlayerController : MonoBehaviour
     //TODO: *-1 cuando pasen un bool
     void Update()
     {
-        Debug.Log(currentLifes);
-        if (Input.GetKeyDown(KeyCode.B))
-            subLive(-1);
-        if (Input.GetKeyDown(KeyCode.S))
-            subLive(1);
+        //if (Input.GetKeyDown(KeyCode.B))
+        //    subLive(-1);
+        //if (Input.GetKeyDown(KeyCode.S))
+        //    subLive(1);
         if (isGrounded)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
@@ -103,21 +112,43 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.position.z > -limite)
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - limite);
     }
+
     void moveRight()
     {
         if (gameObject.transform.position.z < limite)
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + limite);
     }
+
     public void subLive(int quantity)
     {
-
-        if (currentLifes > 1 && currentLifes < maxLive)
+        currentLifes += quantity;
+        Debug.Log("Current " + currentLifes);
+        if (!bad)
         {
-            currentLifes += quantity;
             if (currentLifes <= 0)
-                gameManager.LifesLost(!bad);
+            {
+                currentLifes = 0;
+                gameManager.HandleLifes(true, currentLifes);
+            }
+            else if (currentLifes >= maxLifes)
+                currentLifes = maxLifes;
+        }
+        else
+        {
+            if (currentLifes <= -minLifes)
+            {
+                currentLifes = minLifes;
+                Debug.Log("Dah");
+                gameManager.HandleLifes(false, -currentLifes);
+            }
+            else if (currentLifes >= maxLifes)
+            {
+                currentLifes = maxLifes;
+                gameManager.HandleLifes(false, currentLifes);
+            }
         }
     }
+
     public int LiveGetter() { return currentLifes; }
-    public void LiveSetter(int _live) { currentLifes = _live;}
+    public void LiveSetter(int _live) { currentLifes = _live; }
 }
