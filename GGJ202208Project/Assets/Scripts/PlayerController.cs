@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private float velUp = 3, velDownDiff = 0.2f;
     private float vel, jumpPos, posIni, posUp, velDown;
     private int aux = 1;
+    private int live;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
+        live = 3;
     }
     public void SetPosition(Vector3 pos)
     {
@@ -94,4 +96,15 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.position.z < limite)
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + limite);
     }
+    public void subLive(int quantity)
+    {
+        if (live > 0 && live < 3)
+        {
+            live += quantity;
+            return;
+        }
+        //Llamar a muerte
+    }
+    public int LiveGetter() { return live; }
+    public void LiveSetter(int _live) { live = live;}
 }
