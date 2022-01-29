@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    const float limite = 3.42f;
-    //private Animator anim;
+    const float limite = 2f;
+    private Rigidbody rb;
+    bool isGrounded;
     // Start is called before the first frame update
     void Start()
     {
-       // anim = GetComponent<Animator>();
+        rb = gameObject.GetComponent<Rigidbody>();
+        isGrounded = true;
     }
 
     //Se mueve en el eje z
     // Update is called once per frame
     //TODO: definir altura del salto
+    //TODO: *-1 cuando pasen un bool
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && gameObject.transform.position.z != limite)
+        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && gameObject.transform.position.z > -limite)
         {
             move("left");
         }
-        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && gameObject.transform.position.z != -limite)
+        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && gameObject.transform.position.z < limite)
         {
+            print(gameObject.transform.position.z);
             move("right");
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             jump();
         }
@@ -34,16 +38,18 @@ public class PlayerController : MonoBehaviour
     {
         if (movement == "left")
         {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + limite);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - limite);
         }
         else if(movement == "right")
         {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z- limite);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + limite);
         }
     }
     void jump()
     {
-        
+        isGrounded = false;
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, new Vector3(gameObject.transform.position.x, 50, gameObject.transform.position.z), Time.deltaTime * 10);
+        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, new Vector3(gameObject.transform.position.x, -50, gameObject.transform.position.z), Time.deltaTime * 10);
+        //isGrounded = true;
     }
-
 }
