@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
     private int jumpHeight = 3;
     [SerializeField]
     private float velUp = 3, velDownDiff = 0.2f;
-    private float vel, jumpPos, posIni, velDown;
+    private float vel, jumpPos, posIni, posUp, velDown;
     // Start is called before the first frame update
     void Start()
     {
         jumpPos = transform.position.y;
         posIni = transform.position.y;
+        posUp = transform.position.y + jumpHeight;
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
     }
     void jump()
     {
-        jumpPos = posIni + jumpHeight;
+        jumpPos = posUp;
         isGrounded = false;
     }
     private void LateUpdate()
@@ -64,16 +65,18 @@ public class PlayerController : MonoBehaviour
                                                     Time.deltaTime * vel);
         if (!isGrounded)
         {
-            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(jumpPos) - 0.1))
+            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(posUp) - 0.1))
             {
                 jumpPos = posIni;
                 vel = velDown;
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, posUp, gameObject.transform.position.z);
             }
             if (Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.1))
             {
-                Debug.Log(gameObject.transform.position.y);
                 isGrounded = true;
                 vel = velUp;
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
+                Debug.Log(gameObject.transform.position.y);
             }
         }
 
