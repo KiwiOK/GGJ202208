@@ -29,7 +29,7 @@ public class SpawnerRoadObject : MonoBehaviour
         return null;
     }
 
-    public void SpawnGoodObject()
+    public void SpawnGoodObject(int increaseSpeed)
     {
         GameObject objectToSpawn = FirstObjectReady(_poolGoodObjects);
         if (objectToSpawn == null)
@@ -39,11 +39,12 @@ public class SpawnerRoadObject : MonoBehaviour
         else
         {
             objectToSpawn.SetActive(true);
+            objectToSpawn.GetComponent<RoadObject>().IncreaseSpeed(increaseSpeed);
             objectToSpawn.transform.position = this.transform.position;
         }
 
     }
-    public void SpawnBadObject()
+    public void SpawnBadObject(int increaseSpeed)
     {
         GameObject objectToSpawn = FirstObjectReady(_poolBadObjects);
         if (objectToSpawn == null)
@@ -53,6 +54,7 @@ public class SpawnerRoadObject : MonoBehaviour
         else
         {
             objectToSpawn.SetActive(true);
+            objectToSpawn.GetComponent<RoadObject>().IncreaseSpeed(increaseSpeed);
             objectToSpawn.transform.position = this.transform.position;
         }
     }

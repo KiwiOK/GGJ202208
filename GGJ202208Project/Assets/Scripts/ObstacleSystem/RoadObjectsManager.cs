@@ -17,6 +17,7 @@ public class RoadObjectsManager : MonoBehaviour
     private bool _isPlatformFlipped;
 
     private float _globalTimer;
+    private int _increaseSpeed;
     private bool _isDejavu = false;
     private bool _isCodigoLimpio = false;
 
@@ -26,6 +27,7 @@ public class RoadObjectsManager : MonoBehaviour
     void Start()
     {
         _isPlatformFlipped = false;
+        _increaseSpeed = 0;
     }
 
     // Update is called once per frame
@@ -56,12 +58,12 @@ public class RoadObjectsManager : MonoBehaviour
         //Spawn Power Up
         if (randomGoodOrBad == 1 && SpawnerSelected.GetComponent<SpawnerRoadObject>())
         {
-            _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnGoodObject();
+            _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnGoodObject(_increaseSpeed);
         }
         else
         {
             //Spawn obstacle
-            _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnBadObject();
+            _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnBadObject(_increaseSpeed);
         }
         _timeSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
         _timerBetweenSpawns = 0;
@@ -85,7 +87,8 @@ public class RoadObjectsManager : MonoBehaviour
 
             _isDejavu = true;
             _minTimeSpawn = 1;
-            _maxTimeSpawn = 2;
+            _maxTimeSpawn = 1;
+            //_increaseSpeed += 10;
            //gameObject.SendMessage("IncreaseSpeed", 10);
 
         }
@@ -94,6 +97,7 @@ public class RoadObjectsManager : MonoBehaviour
             _isCodigoLimpio = true;
             _minTimeSpawn = 2;
             _maxTimeSpawn = 4;
+            //_increaseSpeed += 10;
             //gameObject.SendMessage("IncreaseSpeed", 10);
         }
     }
