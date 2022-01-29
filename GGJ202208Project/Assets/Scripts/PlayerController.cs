@@ -117,7 +117,6 @@ public class PlayerController : MonoBehaviour
             if (currentLifes <= 0)
                 gameManager.LifesLost(!bad);
         }
-        //Llamar a muerte
     }
     public int LiveGetter() { return currentLifes; }
     public void LiveSetter(int _live) { currentLifes = _live;}
