@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float velUp = 3, velDownDiff = 0.2f;
     private float vel, jumpPos, posIni, posUp, velDown;
+    private int live;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
+        live = 3;
     }
 
     //Se mueve en el eje z
@@ -82,30 +84,15 @@ public class PlayerController : MonoBehaviour
     {
 
     }
-    //private void LateUpdate()
-    //{
-    //    gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
-    //                                                new Vector3(gameObject.transform.position.x, jumpPos, gameObject.transform.position.z),
-    //                                                Time.deltaTime * vel);
-    //    Debug.Log(jumpPos);
-    //    float a = posUp - 0.15f;
-    //    if (isGrounded == false)
-    //    {
-    //        if (gameObject.transform.position.y >= a)
-    //        {
-    //            gameObject.transform.position = new Vector3(gameObject.transform.position.x, posUp, gameObject.transform.position.z);
-    //            jumpPos = posIni;
-    //            vel = velDown;
-    //        }
-    //        if (Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.15))
-    //        {
-    //            gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
-    //            isGrounded = true;
-    //            vel = velUp;
-    //            Debug.Log(gameObject.transform.position.y);
-    //        }
-    //    }
-
-
-    //}
+    public void subLive(int quantity)
+    {
+        if (live > 0 && live < 3)
+        {
+            live += quantity;
+            return;
+        }
+        //Llamar a muerte
+    }
+    public int LiveGetter() { return live; }
+    public void LiveSetter(int _live) { live = live;}
 }
