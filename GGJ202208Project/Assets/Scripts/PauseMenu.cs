@@ -24,16 +24,14 @@ public class PauseMenu : MonoBehaviour
     }
     public void PauseGame()
     {
-        pauseMenu.enabled = true;
+        pauseMenu.enabled = gameIsPaused = !gameIsPaused;
         Time.timeScale = 0f;
-        gameIsPaused = true;
     }
 
     public void ResumeGame()
     {
-        pauseMenu.enabled = false;
+        pauseMenu.enabled = gameIsPaused = !gameIsPaused;
         Time.timeScale = 1f;
-        gameIsPaused = false;
     }
     public void Quit() { Application.Quit(); }
 }
