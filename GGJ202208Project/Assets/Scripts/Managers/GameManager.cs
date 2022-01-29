@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
         mainCam = Camera.main;
         canvas = FindObjectOfType<BackgroundSwitch>().gameObject;
         NewRandomLifesLimit();
+        playerBad.SetActive(false);
+        playerGood.SetActive(true);
         obstacleSpawner = FindObjectOfType<RoadObjectsManager>().gameObject;
         enviromentManager = FindObjectOfType<EnviromentSystemManager>().gameObject;
     }
@@ -58,18 +60,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void NewRandomLifesLimit() {
+    private void NewRandomLifesLimit()
+    {
         nLimitH = Random.Range(1, 5);
-        Debug.Log("VidasAux" + nLimitH);
-        playerGood.GetComponent<PlayerController>().SetLifes(nLimitH);
-        playerBad.GetComponent<PlayerController>().SetLifes(nLifes - nLimitH);
+        Debug.Log("VidasAux " + nLimitH);
+        playerGood.GetComponent<PlayerController>().SetLifesLimit(nLimitH);
+        playerBad.GetComponent<PlayerController>().SetLifesLimit(nLifes - nLimitH, nLimitH);
     }
 
-    public void LifesLost(bool goodPlayer)
+    public void HandleLifes(bool goodPlayer, int vidas)
     {
-        if (goodPlayer)
+        Debug.Log(goodPlayer + ", " + vidas);
+        if (goodPlayer && vidas == 0)
             ChangeSide();
-        else { }
-        //EndGame
+        else if (!goodPlayer)
+        {
+            if (vidas > 0)
+                ChangeSide();
+            else
+                Application.Quit();
+        }
     }
 }
