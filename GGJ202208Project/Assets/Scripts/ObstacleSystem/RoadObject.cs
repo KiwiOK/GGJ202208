@@ -37,7 +37,7 @@ public class RoadObject : MonoBehaviour
                 //Sonido al colisionar con el objeto??
                 // _collisionSoundSrc.Play();
                 collision.gameObject.GetComponent<PlayerController>().subLive(_effectQuantity);
-                
+
                 // Desactivamos el GO
                 this.gameObject.SetActive(false);
                 break;
@@ -50,6 +50,11 @@ public class RoadObject : MonoBehaviour
             // Desactivamos el GO
             this.gameObject.SetActive(false);
 
+    }
+
+    public void IncreaseSpeed(int speed)
+    {
+        _objectVelocityIncrement += speed;
     }
 }
 
