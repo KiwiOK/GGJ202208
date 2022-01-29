@@ -5,15 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     const float limite = 2f;
-    private Rigidbody rb;
     bool isGrounded;
+    [SerializeField]
     private int jumpHeight = 3;
-    private float jumpPos = 0.5f, vel = 2, velUp = 2, velDown=2.3f;
+    [SerializeField]
+    private float velUp = 3, velDownDiff;
+    private float vel, jumpPos = 0.5f, velDown;
     // Start is called before the first frame update
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
         isGrounded = true;
+        velDown = velUp + velDownDiff;
+        vel = velUp;
     }
 
     //Se mueve en el eje z
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-                jump();
+            jump();
         }
     }
     void move(string movement)
@@ -64,12 +67,12 @@ public class PlayerController : MonoBehaviour
                                                     Time.deltaTime * vel);
         if (!isGrounded)
         {
-            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(jumpPos)-0.2))
+            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(jumpPos) - 0.2))
             {
                 jumpPos = 0.5f;
                 vel = velDown;
             }
-            if (Mathf.Abs(gameObject.transform.position.y) <= 0.5)
+            if (Mathf.Abs(gameObject.transform.position.y) <= 0.55)
             {
                 isGrounded = true;
                 vel = velUp;
