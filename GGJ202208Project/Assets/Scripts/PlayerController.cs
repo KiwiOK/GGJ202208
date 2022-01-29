@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     const float limite = 2f;
-    bool isGrounded;
+    bool isGrounded, up=false;
     [SerializeField]
     private int jumpHeight = 3;
     [SerializeField]
@@ -28,18 +28,43 @@ public class PlayerController : MonoBehaviour
     //TODO: *-1 cuando pasen un bool
     void Update()
     {
-        if (isGrounded && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && gameObject.transform.position.z > -limite)
+        if (isGrounded)
         {
-            move("left");
+            if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && gameObject.transform.position.z > -limite)
+            {
+                move("left");
+            }
+            else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && gameObject.transform.position.z < limite)
+            {
+                move("right");
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                jumpPos = posUp;
+                isGrounded = false;
+                up = true;
+            }
         }
-        else if (isGrounded && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && gameObject.transform.position.z < limite)
+
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
+                                                   new Vector3(gameObject.transform.position.x, jumpPos, gameObject.transform.position.z),
+                                                   Time.deltaTime * vel);
+        
+        if (isGrounded == false)
         {
-            //print(gameObject.transform.position.z);
-            move("right");
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            jump();
+            if (up && gameObject.transform.position.y >= (Mathf.Abs(posUp) - 0.15))
+            {
+                //gameObject.transform.position = new Vector3(gameObject.transform.position.x, posUp, gameObject.transform.position.z);
+                jumpPos = posIni;
+                vel = velDown;
+                up = false;
+            }
+            else if (!up && Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.15))
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
+                isGrounded = true;
+                vel = velUp;
+            }
         }
     }
     void move(string movement)
@@ -55,31 +80,32 @@ public class PlayerController : MonoBehaviour
     }
     void jump()
     {
-        jumpPos = posUp;
-        isGrounded = false;
-    }
-    private void LateUpdate()
-    {
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
-                                                    new Vector3(gameObject.transform.position.x, jumpPos, gameObject.transform.position.z),
-                                                    Time.deltaTime * vel);
-        if (!isGrounded)
-        {
-            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(posUp) - 0.1))
-            {
-                jumpPos = posIni;
-                vel = velDown;
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x, posUp, gameObject.transform.position.z);
-            }
-            if (Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.1))
-            {
-                isGrounded = true;
-                vel = velUp;
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
-                Debug.Log(gameObject.transform.position.y);
-            }
-        }
-
 
     }
+    //private void LateUpdate()
+    //{
+    //    gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
+    //                                                new Vector3(gameObject.transform.position.x, jumpPos, gameObject.transform.position.z),
+    //                                                Time.deltaTime * vel);
+    //    Debug.Log(jumpPos);
+    //    float a = posUp - 0.15f;
+    //    if (isGrounded == false)
+    //    {
+    //        if (gameObject.transform.position.y >= a)
+    //        {
+    //            gameObject.transform.position = new Vector3(gameObject.transform.position.x, posUp, gameObject.transform.position.z);
+    //            jumpPos = posIni;
+    //            vel = velDown;
+    //        }
+    //        if (Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.15))
+    //        {
+    //            gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
+    //            isGrounded = true;
+    //            vel = velUp;
+    //            Debug.Log(gameObject.transform.position.y);
+    //        }
+    //    }
+
+
+    //}
 }
