@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playerBad;
     private Camera mainCam;
-    private GameObject canvas;
-    private GameObject obstacleSpawner;
+    private GameObject canvas, obstacleSpawner, enviromentManager;
 
     bool goodSide = true;
     // Start is called before the first frame update
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour
         canvas = FindObjectOfType<BackgroundSwitch>().gameObject;
         Debug.Log(canvas);
         obstacleSpawner = FindObjectOfType<RoadObjectsManager>().gameObject;
+        enviromentManager = FindObjectOfType<EnviromentSystemManager>().gameObject;
     }
 
     // Update is called once per frame
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         canvas.GetComponent<BackgroundSwitch>().ChangeBackground();
         mainCam.GetComponent<CameraMovement>().ChangeScenario();
         obstacleSpawner.GetComponent<RoadObjectsManager>().IsPlatformFlipped = !goodSide;
+        enviromentManager.GetComponent<EnviromentSystemManager>().IsPlatformFlipped = !goodSide;
         ChangePlayer();
 
     }
