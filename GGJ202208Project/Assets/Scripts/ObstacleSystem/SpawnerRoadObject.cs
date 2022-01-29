@@ -6,31 +6,26 @@ public class SpawnerRoadObject : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] _poolGoodObjects;
-    //[SerializeField]
+    [SerializeField]
     private GameObject[] _poolBadObjects;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void Start() { }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() { }
 
-    GameObject FirstObjectReady(GameObject[] objectList) {
+    GameObject FirstObjectReady(GameObject[] objectList)
+    {
         GameObject result;
         for (int i = 0; i < objectList.Length; i++)
-		{
+        {
             if (!objectList[i].activeSelf)
             {
                 result = objectList[i];
                 return result;
             }
-		}
+        }
         return null;
     }
 
