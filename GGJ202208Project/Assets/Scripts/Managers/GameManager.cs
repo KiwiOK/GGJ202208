@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             if (vidas > 0)
                 ChangeSide();
             else
-                Application.Quit();
+                SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
     }
 }

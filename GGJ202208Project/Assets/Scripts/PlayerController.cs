@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SetLifesLimit(int max, int min)
-    {
+    {        
         maxLifes = max;
         minLifes = min;
         currentLifes = 0;
