@@ -290,7 +290,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1064628145}
-        m_TargetAssemblyTypeName: GameOverButt, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1064628143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a95ee48b652b8478a096f81b2d4e0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f916c96ebee4234c9051f5d3bacff57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1153921144
@@ -884,7 +884,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1064628145}
-        m_TargetAssemblyTypeName: GameOverButt, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Credits
         m_Mode: 1
         m_Arguments:
@@ -1083,8 +1083,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1064628145}
-        m_TargetAssemblyTypeName: GameOverButt, Assembly-CSharp
-        m_MethodName: Quit
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

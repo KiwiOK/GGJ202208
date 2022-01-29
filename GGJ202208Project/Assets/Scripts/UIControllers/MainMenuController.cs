@@ -7,7 +7,11 @@ public class MainMenuController : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("SceneFlipWMovement&Objects");
+        SceneManager.LoadScene("SceneEnviroment");
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene("SceneEnviroment", LoadSceneMode.Single);
     }
 
     public void Credits()
