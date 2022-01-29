@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadObjectsManager : MonoBehaviour
+public class EnviromentSystemManager : MonoBehaviour 
 {
     [SerializeField]
     private GameObject[] _spawners;
@@ -24,44 +24,32 @@ public class RoadObjectsManager : MonoBehaviour
         _isPlatformFlipped = false;
     }
 
-    // Update is called once per frame
+// Update is called once per frame
     void Update()
     {
         _timerBetweenSpawns += Time.deltaTime;
         if (_timerBetweenSpawns > _timeSpawn)
         {
-            SpawnNewRoadObject();
+            SpawnNewEnviromentObject();
         }
     }
 
-    void SpawnNewRoadObject()
+    void SpawnNewEnviromentObject()
     {
-        int randomSpawner = Random.Range(0, 3);
+        int randomSpawner = 0;
         if (IsPlatformFlipped)
         {
-            randomSpawner = Random.Range(3, 6);
+            randomSpawner = 1;
         }
-
-        //print("random Spawner: " + randomSpawner);
         GameObject SpawnerSelected = _spawners[randomSpawner];
 
-        int randomGoodOrBad = Random.Range(0, 8);
-
-        //Spawn Power Up
-        if (randomGoodOrBad == 1 && SpawnerSelected.GetComponent<SpawnerRoadObject>())
+        if (SpawnerSelected.GetComponent<SpawnerEnviromentObject>())
         {
-            //print("SpawnGOOD: " + randomGoodOrBad);
-            _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnGoodObject();
-        }
-        else
-        {
-            //Spawn obstacle
-            //print("SpawnBAD: " + randomGoodOrBad);
-            _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnBadObject();
+            _spawners[randomSpawner].GetComponent<SpawnerEnviromentObject>().SpawnEnviromentObject();
         }
         _timeSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
         _timerBetweenSpawns = 0;
 
-        //print("_timeSpawn: " + _timeSpawn);
+        print("_timeSpawn: " + _timeSpawn);
     }
 }
