@@ -54,10 +54,17 @@ public class PlayerController : MonoBehaviour
     {
         jumpPos = gameObject.transform.position.y + jumpHeight;
         isGrounded = false;
-        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
-        //                                            new Vector3(gameObject.transform.position.x, jumpPos, gameObject.transform.position.z),
-        //                                            Time.deltaTime * 2);
-        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, new Vector3(gameObject.transform.position.x, -50, gameObject.transform.position.z), Time.deltaTime * 10);
+        print(gameObject.transform.position);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, 
+            new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+30, 
+            gameObject.transform.position.z), Time.deltaTime * 10);
+        print(gameObject.transform.position);
+        /*int i = 0;
+        while( i < 1000000000000000000) { ++i; }
+        
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 30, gameObject.transform.position.z), Time.deltaTime * 10);
+        */
+        
         //isGrounded = true;
     }
     private void LateUpdate()
