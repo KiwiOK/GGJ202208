@@ -40,6 +40,11 @@ public class SoundController : MonoBehaviour
         _Music.Play();
     }
 
+    private void EnviromentObjectSound(AudioSource source)
+    {
+        source.clip = _BadObjectAudio;
+        source.Play();
+    }
 
     public void BadObjectSound(AudioSource source)
     {
