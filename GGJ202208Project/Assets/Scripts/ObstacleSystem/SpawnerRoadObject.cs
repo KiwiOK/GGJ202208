@@ -5,8 +5,6 @@ using UnityEngine;
 public class SpawnerRoadObject : MonoBehaviour
 {
     [SerializeField]
-    private int time;
-    [SerializeField]
     private GameObject[] _poolGoodObjects;
     //[SerializeField]
     private GameObject[] _poolBadObjects;
@@ -36,16 +34,31 @@ public class SpawnerRoadObject : MonoBehaviour
         return null;
     }
 
-    void SpawnGoodObject()
+    public void SpawnGoodObject()
     {
         GameObject objectToSpawn = FirstObjectReady(_poolGoodObjects);
-        objectToSpawn.SetActive(true);
-        objectToSpawn.transform.position = this.transform.position;
+        if (objectToSpawn == null)
+        {
+            print("NO QUEDAN COSAS BUENAS QUE SPAWNEAR");
+        }
+        else
+        {
+            objectToSpawn.SetActive(true);
+            objectToSpawn.transform.position = this.transform.position;
+        }
+
     }
-    void SpawnBadObject()
+    public void SpawnBadObject()
     {
         GameObject objectToSpawn = FirstObjectReady(_poolBadObjects);
-        objectToSpawn.SetActive(true);
-        objectToSpawn.transform.position = this.transform.position;
+        if (objectToSpawn == null)
+        {
+            print("NO QUEDAN COSAS MALAS QUE SPAWNEAR");
+        }
+        else
+        {
+            objectToSpawn.SetActive(true);
+            objectToSpawn.transform.position = this.transform.position;
+        }
     }
 }
