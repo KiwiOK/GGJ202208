@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
+    private int nLifes = 7;
+    private int nLimitH;
+    [SerializeField]
     private GameObject playerGood;
     [SerializeField]
     private GameObject playerBad;
@@ -17,7 +20,7 @@ public class GameManager : MonoBehaviour
     {
         mainCam = Camera.main;
         canvas = FindObjectOfType<BackgroundSwitch>().gameObject;
-        Debug.Log(canvas);
+        NewRandomLifesLimit();
         obstacleSpawner = FindObjectOfType<RoadObjectsManager>().gameObject;
         enviromentManager = FindObjectOfType<EnviromentSystemManager>().gameObject;
     }
@@ -26,9 +29,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-            ChangeSize();
+            ChangeSide();
     }
-    private void ChangeSize()
+    private void ChangeSide()
     {
         goodSide = !goodSide;
         canvas.GetComponent<BackgroundSwitch>().ChangeBackground();
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
             playerGood.transform.position = new Vector3(playerBad.transform.position.x, -playerBad.transform.position.y, -playerBad.transform.position.z);
             playerBad.SetActive(false);
             playerGood.SetActive(true);
+            NewRandomLifesLimit();
         }
         else
         {
@@ -52,5 +56,20 @@ public class GameManager : MonoBehaviour
             playerGood.SetActive(false);
             playerBad.SetActive(true);
         }
+    }
+
+    private void NewRandomLifesLimit() {
+        nLimitH = Random.Range(1, 5);
+        Debug.Log("VidasAux" + nLimitH);
+        playerGood.GetComponent<PlayerController>().SetLifes(nLimitH);
+        playerBad.GetComponent<PlayerController>().SetLifes(nLifes - nLimitH);
+    }
+
+    public void LifesLost(bool goodPlayer)
+    {
+        if (goodPlayer)
+            ChangeSide();
+        else { }
+        //EndGame
     }
 }

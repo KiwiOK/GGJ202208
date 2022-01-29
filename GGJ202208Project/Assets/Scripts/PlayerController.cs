@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour
     private float velUp = 3, velDownDiff = 0.2f;
     private float vel, jumpPos, posIni, posUp, velDown;
     private int aux = 1;
-    private int live;
+    private int maxLive, currentLifes;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         if (bad)
             aux = -1;
         jumpPos = transform.position.y;
@@ -26,7 +28,12 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
-        live = 3;
+        //live = 3;
+    }
+    public void SetLifes(int l)
+    {
+        maxLive = l;
+        currentLifes = l;
     }
     public void SetPosition(Vector3 pos)
     {
@@ -39,6 +46,11 @@ public class PlayerController : MonoBehaviour
     //TODO: *-1 cuando pasen un bool
     void Update()
     {
+        Debug.Log(currentLifes);
+        if (Input.GetKeyDown(KeyCode.B))
+            subLive(-1);
+        if (Input.GetKeyDown(KeyCode.S))
+            subLive(1);
         if (isGrounded)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
@@ -98,13 +110,15 @@ public class PlayerController : MonoBehaviour
     }
     public void subLive(int quantity)
     {
-        if (live > 0 && live < 3)
+
+        if (currentLifes > 1 && currentLifes < maxLive)
         {
-            live += quantity;
-            return;
+            currentLifes += quantity;
+            if (currentLifes <= 0)
+                gameManager.LifesLost(!bad);
         }
         //Llamar a muerte
     }
-    public int LiveGetter() { return live; }
-    public void LiveSetter(int _live) { live = live;}
+    public int LiveGetter() { return currentLifes; }
+    public void LiveSetter(int _live) { currentLifes = _live;}
 }

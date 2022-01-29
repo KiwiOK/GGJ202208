@@ -42,7 +42,7 @@ public class RoadObjectsManager : MonoBehaviour
             randomSpawner = Random.Range(3, 6);
         }
 
-        print("random Spawner: " + randomSpawner);
+        //print("random Spawner: " + randomSpawner);
         GameObject SpawnerSelected = _spawners[randomSpawner];
 
         int randomGoodOrBad = Random.Range(0, 8);
@@ -50,18 +50,18 @@ public class RoadObjectsManager : MonoBehaviour
         //Spawn Power Up
         if (randomGoodOrBad == 1 && SpawnerSelected.GetComponent<SpawnerRoadObject>())
         {
-            print("SpawnGOOD: " + randomGoodOrBad);
+            //print("SpawnGOOD: " + randomGoodOrBad);
             _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnGoodObject();
         }
         else
         {
             //Spawn obstacle
-            print("SpawnBAD: " + randomGoodOrBad);
+            //print("SpawnBAD: " + randomGoodOrBad);
             _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnBadObject();
         }
         _timeSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
         _timerBetweenSpawns = 0;
 
-        print("_timeSpawn: " + _timeSpawn);
+        //print("_timeSpawn: " + _timeSpawn);
     }
 }

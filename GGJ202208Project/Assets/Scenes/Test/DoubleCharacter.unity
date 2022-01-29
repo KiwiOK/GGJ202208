@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 621038173}
   - component: {fileID: 621038172}
   m_Layer: 0
-  m_Name: wqe
+  m_Name: LookAtCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
