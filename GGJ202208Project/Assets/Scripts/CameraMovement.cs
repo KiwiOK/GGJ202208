@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Q))
             ChangeScenario();
                 //transform.position = new Vector3(transform.position.x, transform.position.y * -1, transform.position.z);
     }

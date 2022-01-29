@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private int jumpHeight = 3;
     [SerializeField]
-    private float velUp = 3, velDownDiff;
-    private float vel, jumpPos = 0.5f, velDown;
+    private float velUp = 3, velDownDiff = 0.2f;
+    private float vel, jumpPos, posIni, velDown;
     // Start is called before the first frame update
     void Start()
     {
+        jumpPos = transform.position.y;
+        posIni = transform.position.y;
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
         }
         else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && gameObject.transform.position.z < limite)
         {
-            print(gameObject.transform.position.z);
+            //print(gameObject.transform.position.z);
             move("right");
         }
         else if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -52,20 +54,8 @@ public class PlayerController : MonoBehaviour
     }
     void jump()
     {
-        jumpPos = gameObject.transform.position.y + jumpHeight;
+        jumpPos = posIni + jumpHeight;
         isGrounded = false;
-        print(gameObject.transform.position);
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, 
-            new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+30, 
-            gameObject.transform.position.z), Time.deltaTime * 10);
-        print(gameObject.transform.position);
-        /*int i = 0;
-        while( i < 1000000000000000000) { ++i; }
-        
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 30, gameObject.transform.position.z), Time.deltaTime * 10);
-        */
-        
-        //isGrounded = true;
     }
     private void LateUpdate()
     {
@@ -76,11 +66,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(jumpPos) - 0.2))
             {
-                jumpPos = 0.5f;
+                jumpPos = posIni;
                 vel = velDown;
             }
-            if (Mathf.Abs(gameObject.transform.position.y) <= 0.55)
+            if (Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.2))
             {
+                Debug.Log(gameObject.transform.position.y);
                 isGrounded = true;
                 vel = velUp;
             }
