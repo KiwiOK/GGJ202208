@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     const float limite = 2f;
     private Rigidbody rb;
     bool isGrounded;
+    private int jumpHeight = 3;
+    private float jumpPos = 0.5f, vel = 2, velUp = 2, velDown=2.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            jump();
+                jump();
         }
     }
     void move(string movement)
@@ -40,16 +42,40 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - limite);
         }
-        else if(movement == "right")
+        else if (movement == "right")
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + limite);
         }
     }
     void jump()
     {
+        jumpPos = gameObject.transform.position.y + jumpHeight;
         isGrounded = false;
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, new Vector3(gameObject.transform.position.x, 50, gameObject.transform.position.z), Time.deltaTime * 10);
+        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
+        //                                            new Vector3(gameObject.transform.position.x, jumpPos, gameObject.transform.position.z),
+        //                                            Time.deltaTime * 2);
         //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, new Vector3(gameObject.transform.position.x, -50, gameObject.transform.position.z), Time.deltaTime * 10);
         //isGrounded = true;
+    }
+    private void LateUpdate()
+    {
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
+                                                    new Vector3(gameObject.transform.position.x, jumpPos, gameObject.transform.position.z),
+                                                    Time.deltaTime * vel);
+        if (!isGrounded)
+        {
+            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(jumpPos)-0.2))
+            {
+                jumpPos = 0.5f;
+                vel = velDown;
+            }
+            if (Mathf.Abs(gameObject.transform.position.y) <= 0.5)
+            {
+                isGrounded = true;
+                vel = velUp;
+            }
+        }
+
+
     }
 }
