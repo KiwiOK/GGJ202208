@@ -46,8 +46,9 @@ MonoBehaviour:
   _poolGoodObjects:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   _poolBadObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
