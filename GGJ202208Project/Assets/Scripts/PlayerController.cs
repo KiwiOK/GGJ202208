@@ -27,11 +27,11 @@ public class PlayerController : MonoBehaviour
     //TODO: *-1 cuando pasen un bool
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && gameObject.transform.position.z > -limite)
+        if (isGrounded && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && gameObject.transform.position.z > -limite)
         {
             move("left");
         }
-        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && gameObject.transform.position.z < limite)
+        else if (isGrounded && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && gameObject.transform.position.z < limite)
         {
             //print(gameObject.transform.position.z);
             move("right");
@@ -64,12 +64,12 @@ public class PlayerController : MonoBehaviour
                                                     Time.deltaTime * vel);
         if (!isGrounded)
         {
-            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(jumpPos) - 0.2))
+            if (Mathf.Abs(gameObject.transform.position.y) >= (Mathf.Abs(jumpPos) - 0.1))
             {
                 jumpPos = posIni;
                 vel = velDown;
             }
-            if (Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.2))
+            if (Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.1))
             {
                 Debug.Log(gameObject.transform.position.y);
                 isGrounded = true;
