@@ -14,10 +14,14 @@ public class RoadObjectsManager : MonoBehaviour
     private float _timerBetweenSpawns;
     private float _timeSpawn;
 
+    private bool _isPlatformFlipped;
+
+    public bool IsPlatformFlipped { get => _isPlatformFlipped; set => _isPlatformFlipped = value; }
+
     // Start is called before the first frame update
     void Start()
     {
-
+        _isPlatformFlipped = false;
     }
 
     // Update is called once per frame
@@ -33,11 +37,17 @@ public class RoadObjectsManager : MonoBehaviour
     void SpawnNewRoadObject()
     {
         int randomSpawner = Random.Range(0, 3);
+        if (IsPlatformFlipped)
+        {
+            randomSpawner = Random.Range(3, 6);
+        }
+
         print("random Spawner: " + randomSpawner);
         GameObject SpawnerSelected = _spawners[randomSpawner];
 
         int randomGoodOrBad = Random.Range(0, 8);
 
+        //Spawn Power Up
         if (randomGoodOrBad == 1 && SpawnerSelected.GetComponent<SpawnerRoadObject>())
         {
             print("SpawnGOOD: " + randomGoodOrBad);
@@ -45,6 +55,7 @@ public class RoadObjectsManager : MonoBehaviour
         }
         else
         {
+            //Spawn obstacle
             print("SpawnBAD: " + randomGoodOrBad);
             _spawners[randomSpawner].GetComponent<SpawnerRoadObject>().SpawnBadObject();
         }
