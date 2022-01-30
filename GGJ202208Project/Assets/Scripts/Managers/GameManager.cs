@@ -52,18 +52,20 @@ public class GameManager : MonoBehaviour
             playerBad.SetActive(false);
             playerGood.SetActive(true);
             NewRandomLifesLimit();
+            playerGood.GetComponent<PlayerController>().Fall();
         }
         else
         {
             playerBad.transform.position = new Vector3(playerGood.transform.position.x, -playerGood.transform.position.y, -playerGood.transform.position.z);
             playerGood.SetActive(false);
             playerBad.SetActive(true);
+            playerBad.GetComponent<PlayerController>().Fall();
         }
     }
 
     private void NewRandomLifesLimit()
     {
-        nLimitH = Random.Range(3, 5);
+        nLimitH = Random.Range(1, 5);
         Debug.Log("VidasAux " + nLimitH);
         playerGood.GetComponent<PlayerController>().SetLifesLimit(nLimitH);
         playerBad.GetComponent<PlayerController>().SetLifesLimit(nLifes - nLimitH, nLimitH);
