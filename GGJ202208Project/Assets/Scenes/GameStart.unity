@@ -387,17 +387,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97510591}
   m_CullTransparentMesh: 1
---- !u!114 &206104410 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2267068252456731023, guid: 7033d156a30c25a478e43a07dd3828fd, type: 3}
-  m_PrefabInstance: {fileID: 1399096517}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17a66d0f6ddfded418927d602544566b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &262341727
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +637,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f916c96ebee4234c9051f5d3bacff57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundManager: {fileID: 206104410}
 --- !u!82 &673413321
 AudioSource:
   m_ObjectHideFlags: 0
@@ -795,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9337304, b: 0.7311321, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
