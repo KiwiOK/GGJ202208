@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     private int maxLifes, currentLifes, minLifes, animCont;
     private GameManager gameManager;
     float fallCont = 3;
+   /* [SerializeField]
+    private AudioSource _collisionSoundSrc;
+    private GameObject _soundManagerGO;
+    private SoundManager _soundManager;*/
 
     bool fall = false;
 
@@ -32,6 +36,9 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
+        /*_collisionSoundSrc = GetComponent<AudioSource>();
+        _soundManagerGO = GameObject.Find("SoundManager");
+        _soundManager = _soundManagerGO.GetComponent<SoundManager>();*/
         //animCont = 3;
         //live = 3;
     }
@@ -100,6 +107,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
+                //_soundManager.PlaySideWaisSound(_collisionSoundSrc);
                 if (!bad)
                     moveLeft();
                 else
@@ -108,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
+                //_soundManager.PlaySideWaisSound(_collisionSoundSrc);
                 if (bad)
                     moveLeft();
                 else
@@ -118,7 +127,7 @@ public class PlayerController : MonoBehaviour
                 jumpPos = posUp;
                 isGrounded = false;
                 up = true;
-
+                //_soundManager.PlayJumpSound(_collisionSoundSrc);
                 switch (animCont)
                 {
                     case 0:
