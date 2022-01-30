@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5948585203185191564}
   - component: {fileID: 1549425791822206004}
   m_Layer: 0
-  m_Name: Bat
+  m_Name: NormalTreeA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5436492361262043806}
-  m_Mesh: {fileID: -4239224724994408158, guid: 070da99261af4da439d390a5c68f4eac, type: 3}
+  m_Mesh: {fileID: -7432018027054398609, guid: 618516ba1fd634843ad73c8981cf7d36, type: 3}
 --- !u!23 &226396325150581342
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a81ba229d97d5544d867c048aa00dc8a, type: 2}
+  - {fileID: 2100000, guid: 32efaf2ec76abd24b8f83d1e4a422ac4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectVelocityIncrement: 3
-  _PlaysSound: 2
+  _PlaysSound: 1
   _collisionSoundSrc: {fileID: 0}
 --- !u!82 &1549425791822206004
 AudioSource:
