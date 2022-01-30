@@ -227,7 +227,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jump2-3
+  m_Name: Jump_2-3
   m_Speed: 0.01
   m_CycleOffset: 0
   m_Transitions:
@@ -337,7 +337,7 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9023696159216969975}
-    m_Position: {x: 410, y: 340, z: 0}
+    m_Position: {x: 480, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2172290150044749442}
     m_Position: {x: 190, y: 310, z: 0}
@@ -352,7 +352,7 @@ AnimatorStateMachine:
     m_Position: {x: 210, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4468728178564174112}
-    m_Position: {x: 640, y: 330, z: 0}
+    m_Position: {x: 540, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 580729287821360390}
     m_Position: {x: 860, y: 320, z: 0}
@@ -364,7 +364,7 @@ AnimatorStateMachine:
     m_Position: {x: 810, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1597569046239864253}
-    m_Position: {x: 430, y: 260, z: 0}
+    m_Position: {x: 500, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1836974213501980492}
     m_Position: {x: 10, y: 230, z: 0}
