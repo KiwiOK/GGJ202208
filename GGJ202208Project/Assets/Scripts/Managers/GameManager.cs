@@ -46,9 +46,9 @@ public class GameManager : MonoBehaviour
     }
     private void ChangePlayer()
     {
+        //HE quitado la caida. OJO
         if (goodSide)
         {
-            playerGood.GetComponent<PlayerController>().Fall();
             playerGood.transform.position = new Vector3(playerBad.transform.position.x, -playerBad.transform.position.y, -playerBad.transform.position.z);
             playerBad.SetActive(false);
             playerGood.SetActive(true);
@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            playerBad.GetComponent<PlayerController>().Fall();
             playerBad.transform.position = new Vector3(playerGood.transform.position.x, -playerGood.transform.position.y, -playerGood.transform.position.z);
             playerGood.SetActive(false);
             playerBad.SetActive(true);
@@ -65,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     private void NewRandomLifesLimit()
     {
-        nLimitH = Random.Range(3, 5);
+        nLimitH = Random.Range(1, 5);
         Debug.Log("VidasAux " + nLimitH);
         playerGood.GetComponent<PlayerController>().SetLifesLimit(nLimitH);
         playerBad.GetComponent<PlayerController>().SetLifesLimit(nLifes - nLimitH, nLimitH);
