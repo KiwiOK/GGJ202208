@@ -39,7 +39,7 @@ public class SpawnerEnviromentObject : MonoBehaviour
         GameObject objectToSpawn = FirstObjectReady(_poolEnviromentObjects);
         if (objectToSpawn == null)
         {
-            print("NO QUEDA ENVIROMENT PARA SPAWNEAR");
+            //print("NO QUEDA ENVIROMENT PARA SPAWNEAR");
         }
         else
         {
