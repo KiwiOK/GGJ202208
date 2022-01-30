@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void NewRandomLifesLimit()
     {
-        nLimitH = Random.Range(1, 5);
+        nLimitH = Random.Range(3, 5);
         Debug.Log("VidasAux " + nLimitH);
         playerGood.GetComponent<PlayerController>().SetLifesLimit(nLimitH);
         playerBad.GetComponent<PlayerController>().SetLifesLimit(nLifes - nLimitH, nLimitH);
