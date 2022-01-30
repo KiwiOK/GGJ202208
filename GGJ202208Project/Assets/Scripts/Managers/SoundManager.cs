@@ -36,42 +36,42 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip[] _ClickSound;
 
-
     private AudioSource _Music;
 
     //starts and plays only the music clip on loop
     void Start()
     {
         _Music = GetComponent<AudioSource>();
-        _Music.clip = _MusicAudio;
+        _Music.clip = _MenuMusic;
         _Music.loop = true;
         _Music.volume = 0.2f;
 
         DontDestroyOnLoad(this.gameObject);
-        PlayMusic();
+        PlayMenuMusic();
     }
 
-    private void PlayMusic()
+    public void PlayMusic()
     {
         _Music.clip = _MusicAudio;
         _Music.Play();
     }
-    private void PlayNigthmareMusic()
+
+    public void PlayNigthmareMusic()
     {
         _Music.clip = _NigthmareMusic;
         _Music.Play();
     }
-    private void PlayTransitionMusic()
+    public void PlayTransitionMusic()
     {
         _Music.clip = _TransitionMusic;
         _Music.Play();
     }
-    private void PlayEndGameMusic()
+    public void PlayEndGameMusic()
     {
         _Music.clip = _EndGameMusic;
         _Music.Play();
     }
-    private void PlayMenuMusic()
+    public void PlayMenuMusic()
     {
         _Music.clip = _MenuMusic;
         _Music.Play();
