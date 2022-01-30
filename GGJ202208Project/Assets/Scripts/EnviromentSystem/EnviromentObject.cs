@@ -7,6 +7,12 @@ public class EnviromentObject : MonoBehaviour
     [SerializeField]
     private int _objectVelocityIncrement;
     [SerializeField]
+    private int _PlaysSound;
+    //0 -> sin sonido ambiente
+    //1 -> bird
+    //2 -> bat
+
+    [SerializeField]
     private AudioSource _collisionSoundSrc;
 
     private GameObject _soundManagerGO;
@@ -19,8 +25,21 @@ public class EnviromentObject : MonoBehaviour
         _soundManager = _soundManagerGO.GetComponent<SoundManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+	private void OnEnable()
+	{
+        if (_PlaysSound == 1)
+        {
+            _soundManager.PlayBirdAudio(_collisionSoundSrc);
+        }
+        else if(_PlaysSound == 2)
+		{
+            _soundManager.PlayBatSound(_collisionSoundSrc);
+        }
+
+    }
+
+	// Update is called once per frame
+	void Update()
     {
         transform.Translate(new Vector3(1.0f, 0f, 0f) * Time.deltaTime * _objectVelocityIncrement, Space.World);
     }

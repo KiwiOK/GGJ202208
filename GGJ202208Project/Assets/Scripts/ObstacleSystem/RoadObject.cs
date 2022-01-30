@@ -12,10 +12,9 @@ public class RoadObject : MonoBehaviour
     private AudioSource _collisionSoundSrc;
     [SerializeField]
     private int _RoadObjectType;
-    //0 ->BAT
-    //1 ->BIRD
-    //2 ->DISTORTED
-    //3 ->
+    //0 -> GOLPE
+    //1 -> VANILLA
+    //2 -> DISTORTED
 
     private GameObject _soundManagerGO;
     private SoundManager _soundManager;
@@ -53,13 +52,9 @@ public class RoadObject : MonoBehaviour
                 break;
         }
 
-        if (_RoadObjectType == 0)
+        if (_RoadObjectType == 1) 
         {
-            _soundManager.PlayBatSound(_collisionSoundSrc);
-        }
-        else if (_RoadObjectType == 1) 
-        {
-            _soundManager.PlayBirdAudio(_collisionSoundSrc);
+            _soundManager.PlayVanillaThoughtsSound(_collisionSoundSrc);
         }
         else if (_RoadObjectType == 2)
 		{
