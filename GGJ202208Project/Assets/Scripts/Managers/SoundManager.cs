@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundController : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     //get all the sounds of the game serialized
     [SerializeField]
@@ -10,9 +10,31 @@ public class SoundController : MonoBehaviour
     [SerializeField]
     private AudioClip _NigthmareMusic;
     [SerializeField]
-    private AudioClip _BadObjectAudio;
+    private AudioClip _TransitionMusic;
     [SerializeField]
-    private AudioClip _GoodObjectAudio;
+    private AudioClip _EndGameMusic;
+    [SerializeField]
+    private AudioClip _MenuMusic;
+    [SerializeField]
+    private AudioClip[] _BatSound;
+    [SerializeField]
+    private AudioClip _BirdAudio;
+    [SerializeField]
+    private AudioClip[] _ImpactSound;
+    [SerializeField]
+    private AudioClip[] _FootStepsSound;
+    [SerializeField]
+    private AudioClip[] _JumpSound;
+    [SerializeField]
+    private AudioClip[] _SideWaisSound;
+    [SerializeField]
+    private AudioClip[] _VanillaThoughtsSound;
+    [SerializeField]
+    private AudioClip[] _DistortedThoughtsSound;
+    [SerializeField]
+    private AudioClip[] _TripSound;
+    [SerializeField]
+    private AudioClip[] _ClickSound;
 
 
     private AudioSource _Music;
@@ -36,24 +58,72 @@ public class SoundController : MonoBehaviour
     }
     private void PlayNigthmareMusic()
     {
-        _Music.clip = _MusicAudio;
+        _Music.clip = _NigthmareMusic;
         _Music.Play();
     }
-
-    private void EnviromentObjectSound(AudioSource source)
+    private void PlayTransitionMusic()
     {
-        source.clip = _BadObjectAudio;
+        _Music.clip = _TransitionMusic;
+        _Music.Play();
+    }
+    private void PlayEndGameMusic()
+    {
+        _Music.clip = _EndGameMusic;
+        _Music.Play();
+    }
+    private void PlayMenuMusic()
+    {
+        _Music.clip = _MenuMusic;
+        _Music.Play();
+    }
+    public void PlayBatSound(AudioSource source)
+    {
+        source.clip = _BatSound[(int)Random.Range(0,8)];
         source.Play();
     }
-
-    public void BadObjectSound(AudioSource source)
+    public void PlayBirdAudio(AudioSource source)
     {
-        source.clip = _BadObjectAudio;
+        source.clip = _BirdAudio;
         source.Play();
     }
-    public void GoodObjectSound(AudioSource source)
+    public void PlayImpactSound(AudioSource source)
     {
-        source.clip = _GoodObjectAudio;
+        source.clip = _ImpactSound[(int)Random.Range(0, 3)];
+        source.Play();
+    }
+    public void PlayFootStepsSound(AudioSource source)
+    {
+        source.clip = _FootStepsSound[(int)Random.Range(0, 3)];
+        source.Play();
+    }
+    public void PlayJumpSound(AudioSource source)
+    {
+        source.clip = _JumpSound[(int)Random.Range(0, 3)];
+        source.Play();
+    }
+    public void PlaySideWaisSound(AudioSource source)
+    {
+        source.clip = _SideWaisSound[(int)Random.Range(0, 2)];
+        source.Play();
+    }
+    public void PlayVanillaThoughtsSound(AudioSource source)
+    {
+        source.clip = _VanillaThoughtsSound[(int)Random.Range(0, 2)];
+        source.Play();
+    }
+    public void PlayDistortedThoughtsSound(AudioSource source)
+    {
+        source.clip = _DistortedThoughtsSound[(int)Random.Range(0, 2)];
+        source.Play();
+    }
+    public void PlayTripSound(AudioSource source)
+    {
+        source.clip = _TripSound[(int)Random.Range(0, 5)];
+        source.Play();
+    }
+    public void PlayClickSound(AudioSource source)
+    {
+        source.clip = _ClickSound[(int)Random.Range(0, 2)];
         source.Play();
     }
 }
