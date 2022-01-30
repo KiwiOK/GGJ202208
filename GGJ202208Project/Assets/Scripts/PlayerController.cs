@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private int aux = 1;
     private int lifesLimit, maxLifes, currentLifes, minLifes;
     private GameManager gameManager;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +63,15 @@ public class PlayerController : MonoBehaviour
         //    subLive(1);
         if (isGrounded)
         {
+            if (currentLifes % 3 == 0)
+                gameObject.GetComponent<Animator>().Play("Walking_Color");
+            else if (currentLifes % 3 == 1)
+                gameObject.GetComponent<Animator>().Play("Walking_1-3");
+            else if (currentLifes % 3 == 2)
+                gameObject.GetComponent<Animator>().Play("Walking_2-3");
+            else if (currentLifes % 3 == 3)
+                gameObject.GetComponent<Animator>().Play("Walking_3-3");
+
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
                 if (!bad)
@@ -82,6 +92,14 @@ public class PlayerController : MonoBehaviour
                 jumpPos = posUp;
                 isGrounded = false;
                 up = true;
+                if(currentLifes%3 == 0)
+                    gameObject.GetComponent<Animator>().Play("Jump_Color");
+                else if (currentLifes % 3 == 1)
+                    gameObject.GetComponent<Animator>().Play("Jump_1-3");
+                else if (currentLifes % 3 == 2)
+                    gameObject.GetComponent<Animator>().Play("Jump_2-3");
+                else if (currentLifes % 3 == 3)
+                    gameObject.GetComponent<Animator>().Play("Jump_3-3");
             }
         }
 
@@ -100,9 +118,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (!up && Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.15))
             {
+                gameObject.GetComponent<Animator>().Play("Walking_Color");
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
                 isGrounded = true;
                 vel = velUp;
+                
             }
         }
     }
