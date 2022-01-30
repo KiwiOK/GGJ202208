@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectQuantity: 0
-  _objectVelocityIncrement: 2
+  _objectVelocityIncrement: 15
   _collisionSoundSrc: {fileID: 0}
   _RoadObjectType: 0
 --- !u!82 &5484508897640157390

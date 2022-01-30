@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7968335147430363044
 Transform:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectQuantity: 0
-  _objectVelocityIncrement: 2
+  _objectVelocityIncrement: 15
   _collisionSoundSrc: {fileID: 0}
   _RoadObjectType: 0
 --- !u!82 &5484508897640157390
