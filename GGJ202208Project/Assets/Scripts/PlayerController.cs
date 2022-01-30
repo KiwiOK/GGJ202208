@@ -63,14 +63,15 @@ public class PlayerController : MonoBehaviour
         //    subLive(1);
         if (isGrounded)
         {
-            if (currentLifes % 3 == 0)
+            if (currentLifes == 0)
+                gameObject.GetComponent<Animator>().Play("Walking_3-3");
+            else if (currentLifes % 3 == 0)
                 gameObject.GetComponent<Animator>().Play("Walking_Color");
             else if (currentLifes % 3 == 1)
                 gameObject.GetComponent<Animator>().Play("Walking_1-3");
             else if (currentLifes % 3 == 2)
                 gameObject.GetComponent<Animator>().Play("Walking_2-3");
-            else if (currentLifes % 3 == 3)
-                gameObject.GetComponent<Animator>().Play("Walking_3-3");
+            
 
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
@@ -118,7 +119,14 @@ public class PlayerController : MonoBehaviour
             }
             else if (!up && Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.15))
             {
-                gameObject.GetComponent<Animator>().Play("Walking_Color");
+                if (currentLifes == 0)
+                    gameObject.GetComponent<Animator>().Play("Walking_3-3");
+                else if (currentLifes % 3 == 0)
+                    gameObject.GetComponent<Animator>().Play("Walking_Color");
+                else if (currentLifes % 3 == 1)
+                    gameObject.GetComponent<Animator>().Play("Walking_1-3");
+                else if (currentLifes % 3 == 2)
+                    gameObject.GetComponent<Animator>().Play("Walking_2-3");
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
                 isGrounded = true;
                 vel = velUp;
@@ -167,6 +175,12 @@ public class PlayerController : MonoBehaviour
                 gameManager.HandleLifes(false, currentLifes);
             }
         }
+    }
+
+    public void Fall()
+    {
+        print("AAAAAAAAAA");
+        gameObject.GetComponent<Animator>().Play("Fall_3-3");
     }
 
     public int LiveGetter() { return currentLifes; }
