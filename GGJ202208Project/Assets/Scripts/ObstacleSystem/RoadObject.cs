@@ -49,20 +49,20 @@ public class RoadObject : MonoBehaviour
 
                 // Desactivamos el GO
                 this.gameObject.SetActive(false);
+                if (_RoadObjectType == 1)
+                {
+                    _soundManager.PlayVanillaThoughtsSound(_collisionSoundSrc);
+                }
+                else if (_RoadObjectType == 2)
+                {
+                    _soundManager.PlayDistortedThoughtsSound(_collisionSoundSrc);
+                }
+                else
+                {
+                    _soundManager.PlayImpactSound(_collisionSoundSrc);
+                }
                 break;
-        }
 
-        if (_RoadObjectType == 1) 
-        {
-            _soundManager.PlayVanillaThoughtsSound(_collisionSoundSrc);
-        }
-        else if (_RoadObjectType == 2)
-		{
-            _soundManager.PlayDistortedThoughtsSound(_collisionSoundSrc);
-        }
-        else
-		{
-            _soundManager.PlayImpactSound(_collisionSoundSrc);
         }
     }
 
