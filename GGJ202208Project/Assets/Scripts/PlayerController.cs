@@ -14,9 +14,16 @@ public class PlayerController : MonoBehaviour
     private float velUp = 3, velDownDiff = 0.2f;
     private float vel, jumpPos, posIni, posUp, velDown;
     private int aux = 1;
-    private int lifesLimit, maxLifes, currentLifes, minLifes;
+    private int maxLifes, currentLifes, minLifes, animCont;
     private GameManager gameManager;
-    
+    float fallCont = 3;
+   /* [SerializeField]
+    private AudioSource _collisionSoundSrc;
+    private GameObject _soundManagerGO;
+    private SoundManager _soundManager;*/
+
+    bool fall = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,21 +36,33 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
+        /*_collisionSoundSrc = GetComponent<AudioSource>();
+        _soundManagerGO = GameObject.Find("SoundManager");
+        _soundManager = _soundManagerGO.GetComponent<SoundManager>();*/
+        //animCont = 3;
         //live = 3;
+    }
+    private void OnEnable()
+    {
+        if (bad) animCont = 0;
+        else animCont = 3;
+        //Fall();
     }
 
     public void SetLifesLimit(int max)
     {
         maxLifes = max;
         currentLifes = max;
+        UpdateAnim();
 
     }
 
     public void SetLifesLimit(int max, int min)
-    {        
+    {
         maxLifes = max;
         minLifes = min;
         currentLifes = 0;
+        UpdateAnim();
     }
 
     public void SetPosition(Vector3 pos)
@@ -61,19 +80,34 @@ public class PlayerController : MonoBehaviour
         //    subLive(-1);
         //if (Input.GetKeyDown(KeyCode.S))
         //    subLive(1);
-        if (isGrounded)
+        if (fall)
         {
-            if (currentLifes % 3 == 0)
-                gameObject.GetComponent<Animator>().Play("Walking_Color");
-            else if (currentLifes % 3 == 1)
-                gameObject.GetComponent<Animator>().Play("Walking_1-3");
-            else if (currentLifes % 3 == 2)
-                gameObject.GetComponent<Animator>().Play("Walking_2-3");
-            else if (currentLifes % 3 == 3)
-                gameObject.GetComponent<Animator>().Play("Walking_3-3");
+            fallCont -= Time.deltaTime;
+            if (fallCont < 0) fall = false;
+        }
+        if (isGrounded && !fall)
+        {
+            switch (animCont)
+            {
+                case 0:
+                    gameObject.GetComponent<Animator>().Play("Walking_3-3");
+                    break;
+                case 1:
+                    gameObject.GetComponent<Animator>().Play("Walking_2-3");
+                    break;
+                case 2:
+                    gameObject.GetComponent<Animator>().Play("Walking_1-3");
+                    break;
+                case 3:
+                    gameObject.GetComponent<Animator>().Play("Walking_Color");
+                    break;
+                default:
+                    break;
+            }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
+                //_soundManager.PlaySideWaisSound(_collisionSoundSrc);
                 if (!bad)
                     moveLeft();
                 else
@@ -82,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
+                //_soundManager.PlaySideWaisSound(_collisionSoundSrc);
                 if (bad)
                     moveLeft();
                 else
@@ -92,14 +127,24 @@ public class PlayerController : MonoBehaviour
                 jumpPos = posUp;
                 isGrounded = false;
                 up = true;
-                if(currentLifes%3 == 0)
-                    gameObject.GetComponent<Animator>().Play("Jump_Color");
-                else if (currentLifes % 3 == 1)
-                    gameObject.GetComponent<Animator>().Play("Jump_1-3");
-                else if (currentLifes % 3 == 2)
-                    gameObject.GetComponent<Animator>().Play("Jump_2-3");
-                else if (currentLifes % 3 == 3)
-                    gameObject.GetComponent<Animator>().Play("Jump_3-3");
+                //_soundManager.PlayJumpSound(_collisionSoundSrc);
+                switch (animCont)
+                {
+                    case 0:
+                        gameObject.GetComponent<Animator>().Play("Jump_3-3");
+                        break;
+                    case 1:
+                        gameObject.GetComponent<Animator>().Play("Jump_2-3");
+                        break;
+                    case 2:
+                        gameObject.GetComponent<Animator>().Play("Jump_1-3");
+                        break;
+                    case 3:
+                        gameObject.GetComponent<Animator>().Play("Jump_Color");
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -118,18 +163,26 @@ public class PlayerController : MonoBehaviour
             }
             else if (!up && Mathf.Abs(gameObject.transform.position.y) <= (Mathf.Abs(posIni) + 0.15))
             {
-                if (currentLifes % 3 == 0)
-                    gameObject.GetComponent<Animator>().Play("Walking_Color");
-                else if (currentLifes % 3 == 1)
-                    gameObject.GetComponent<Animator>().Play("Walking_1-3");
-                else if (currentLifes % 3 == 2)
-                    gameObject.GetComponent<Animator>().Play("Walking_2-3");
-                else if (currentLifes % 3 == 3)
-                    gameObject.GetComponent<Animator>().Play("Walking_3-3");
+                switch (animCont)
+                {
+                    case 0:
+                        gameObject.GetComponent<Animator>().Play("Walking_3-3");
+                        break;
+                    case 1:
+                        gameObject.GetComponent<Animator>().Play("Walking_2-3");
+                        break;
+                    case 2:
+                        gameObject.GetComponent<Animator>().Play("Walking_1-3");
+                        break;
+                    case 3:
+                        gameObject.GetComponent<Animator>().Play("Walking_Color");
+                        break;
+                    default:
+                        break;
+                }
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, posIni, gameObject.transform.position.z);
                 isGrounded = true;
                 vel = velUp;
-                
             }
         }
     }
@@ -149,13 +202,13 @@ public class PlayerController : MonoBehaviour
     public void subLive(int quantity)
     {
         currentLifes += quantity;
-        Debug.Log("Current " + currentLifes);
         if (!bad)
         {
-            if (currentLifes <= 0)
+            if (currentLifes < 0)
             {
                 currentLifes = 0;
                 gameManager.HandleLifes(true, currentLifes);
+                //UpdateAnim();
             }
             else if (currentLifes >= maxLifes)
                 currentLifes = maxLifes;
@@ -165,17 +218,56 @@ public class PlayerController : MonoBehaviour
             if (currentLifes <= -minLifes)
             {
                 currentLifes = minLifes;
-                Debug.Log("Dah");
+                //UpdateAnim();
                 gameManager.HandleLifes(false, -currentLifes);
             }
             else if (currentLifes >= maxLifes)
             {
                 currentLifes = maxLifes;
+                //UpdateAnim();
                 gameManager.HandleLifes(false, currentLifes);
             }
         }
+        UpdateAnim();
     }
 
+    public void Fall()
+    {
+        fall = true;
+        fallCont = 3;
+        if (bad)
+            gameObject.GetComponent<Animator>().Play("Fall_3-3");
+
+        else
+            gameObject.GetComponent<Animator>().Play("Fall_Animation");
+    }
+
+    private void UpdateAnim()
+    {
+        if (!bad)
+        {
+            if (currentLifes == maxLifes)
+                animCont = 3;
+            else
+            {
+                float aux = maxLifes / 3.0f;
+                aux *= currentLifes;
+                animCont = (int)aux;
+            }
+        }
+        else if (bad && currentLifes > 0)
+        {
+            if (currentLifes == maxLifes)
+                animCont = 3;
+            else
+            {
+                float aux = minLifes / 3.0f;
+                aux *= currentLifes;
+                animCont = (int)aux;
+            }
+        }
+        Debug.Log("V: " + currentLifes + "Anim: " + animCont);
+    }
     public int LiveGetter() { return currentLifes; }
     public void LiveSetter(int _live) { currentLifes = _live; }
 }
