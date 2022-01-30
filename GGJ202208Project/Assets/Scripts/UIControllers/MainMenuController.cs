@@ -9,6 +9,12 @@ public class MainMenuController : MonoBehaviour
     private SoundManager _soundManager;
     private AudioSource _audioSource;
 
+    [SerializeField]
+    private int _menuSelector;
+    //0 = main menu
+    //1 = creditos
+    //2 = game over
+
     void Start()
     {
         _soundManagerGO = GameObject.Find("SoundManager");
@@ -31,6 +37,7 @@ public class MainMenuController : MonoBehaviour
     {
         _soundManager.PlayClickSound(_audioSource);
         SceneManager.LoadScene("CreditsScene");
+        _soundManager.PlayEndGameMusic();
     }
 
     public void QuitGame()

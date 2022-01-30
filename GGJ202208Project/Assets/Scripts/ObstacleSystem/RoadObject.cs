@@ -10,12 +10,22 @@ public class RoadObject : MonoBehaviour
     private int _objectVelocityIncrement;
     [SerializeField]
     private AudioSource _collisionSoundSrc;
+    [SerializeField]
+    private int _RoadObjectType;
+    //0 ->BAT
+    //1 ->BIRD
+    //2 ->DISTORTED
+    //3 ->
 
+    private GameObject _soundManagerGO;
+    private SoundManager _soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
         _collisionSoundSrc = GetComponent<AudioSource>();
+        _soundManagerGO = GameObject.Find("SoundManager");
+        _soundManager = _soundManagerGO.GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -41,6 +51,23 @@ public class RoadObject : MonoBehaviour
                 // Desactivamos el GO
                 this.gameObject.SetActive(false);
                 break;
+        }
+
+        if (_RoadObjectType == 0)
+        {
+            _soundManager.PlayBatSound(_collisionSoundSrc);
+        }
+        else if (_RoadObjectType == 1) 
+        {
+            _soundManager.PlayBirdAudio(_collisionSoundSrc);
+        }
+        else if (_RoadObjectType == 2)
+		{
+            _soundManager.PlayDistortedThoughtsSound(_collisionSoundSrc);
+        }
+        else
+		{
+            _soundManager.PlayImpactSound(_collisionSoundSrc);
         }
     }
 

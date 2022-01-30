@@ -9,9 +9,14 @@ public class EnviromentObject : MonoBehaviour
     [SerializeField]
     private AudioSource _collisionSoundSrc;
 
+    private GameObject _soundManagerGO;
+    private SoundManager _soundManager;
+
     void Start()
     {
         _collisionSoundSrc = GetComponent<AudioSource>();
+        _soundManagerGO = GameObject.Find("SoundManager");
+        _soundManager = _soundManagerGO.GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -25,6 +30,5 @@ public class EnviromentObject : MonoBehaviour
         if (other.gameObject.tag == "EndWall")
             // Desactivamos el GO
             this.gameObject.SetActive(false);
-
     }
 }
