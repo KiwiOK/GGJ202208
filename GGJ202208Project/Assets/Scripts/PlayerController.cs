@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private int aux = 1;
     private int maxLifes, currentLifes, minLifes, animCont;
     private GameManager gameManager;
+    float fallCont = 3;
+
+    bool fall = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +36,10 @@ public class PlayerController : MonoBehaviour
         //live = 3;
     }
     private void OnEnable()
-    {if (bad) animCont = 0;
+    {
+        if (bad) animCont = 0;
         else animCont = 3;
+        //Fall();
     }
 
     public void SetLifesLimit(int max)
@@ -68,7 +73,12 @@ public class PlayerController : MonoBehaviour
         //    subLive(-1);
         //if (Input.GetKeyDown(KeyCode.S))
         //    subLive(1);
-        if (isGrounded)
+        if (fall)
+        {
+            fallCont -= Time.deltaTime;
+            if (fallCont < 0) fall = false;
+        }
+        if (isGrounded && !fall)
         {
             switch (animCont)
             {
@@ -214,8 +224,11 @@ public class PlayerController : MonoBehaviour
 
     public void Fall()
     {
+        fall = true;
+        fallCont = 3;
         if (bad)
             gameObject.GetComponent<Animator>().Play("Fall_3-3");
+
         else
             gameObject.GetComponent<Animator>().Play("Fall_Animation");
     }
@@ -234,7 +247,8 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if (bad && currentLifes > 0)
-        {if (currentLifes == maxLifes)
+        {
+            if (currentLifes == maxLifes)
                 animCont = 3;
             else
             {

@@ -46,14 +46,13 @@ public class GameManager : MonoBehaviour
     }
     private void ChangePlayer()
     {
-        //HE quitado la caida. OJO
         if (goodSide)
         {
             playerGood.transform.position = new Vector3(playerBad.transform.position.x, -playerBad.transform.position.y, -playerBad.transform.position.z);
             playerBad.SetActive(false);
             playerGood.SetActive(true);
-            playerGood.GetComponent<PlayerController>().Fall();
             NewRandomLifesLimit();
+            playerGood.GetComponent<PlayerController>().Fall();
         }
         else
         {
