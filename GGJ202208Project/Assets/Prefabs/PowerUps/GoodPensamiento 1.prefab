@@ -9,18 +9,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7968335147430363044}
-  - component: {fileID: 8213184850652635474}
-  - component: {fileID: 5825878228170310175}
-  - component: {fileID: 1498836102816692759}
+  - component: {fileID: 4822187620608596247}
+  - component: {fileID: 3936493196253356025}
+  - component: {fileID: 5300321031609368996}
   - component: {fileID: -6487959188359512019}
-  - component: {fileID: 68174655605677603}
+  - component: {fileID: 5484508897640157390}
   m_Layer: 0
-  m_Name: BadPensamiento 1
+  m_Name: GoodPensamiento 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7968335147430363044
 Transform:
   m_ObjectHideFlags: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8213184850652635474
+--- !u!212 &4822187620608596247
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a582e3fc0b722384eb05484fb227488a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ef047df1ff88684c946ae12b11b1c45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &5825878228170310175
+--- !u!65 &3936493196253356025
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1498836102816692759
+--- !u!54 &5300321031609368996
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,10 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectQuantity: 0
-  _objectVelocityIncrement: 15
+  _objectVelocityIncrement: 2
   _collisionSoundSrc: {fileID: 0}
   _RoadObjectType: 0
---- !u!82 &68174655605677603
+--- !u!82 &5484508897640157390
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
