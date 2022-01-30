@@ -207,7 +207,6 @@ public class PlayerController : MonoBehaviour
 
     public void Fall()
     {
-        print("AAAAAAAAAA");
         gameObject.GetComponent<Animator>().Play("Fall_3-3");
     }
 
