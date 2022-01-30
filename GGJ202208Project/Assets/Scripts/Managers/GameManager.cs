@@ -48,18 +48,20 @@ public class GameManager : MonoBehaviour
     {
         if (goodSide)
         {
-            playerGood.GetComponent<PlayerController>().Fall();
+            
             playerGood.transform.position = new Vector3(playerBad.transform.position.x, -playerBad.transform.position.y, -playerBad.transform.position.z);
             playerBad.SetActive(false);
             playerGood.SetActive(true);
+            playerGood.GetComponent<PlayerController>().Fall();
             NewRandomLifesLimit();
         }
         else
         {
-            playerBad.GetComponent<PlayerController>().Fall();
+            
             playerBad.transform.position = new Vector3(playerGood.transform.position.x, -playerGood.transform.position.y, -playerGood.transform.position.z);
             playerGood.SetActive(false);
             playerBad.SetActive(true);
+            playerBad.GetComponent<PlayerController>().Fall();
         }
     }
 
