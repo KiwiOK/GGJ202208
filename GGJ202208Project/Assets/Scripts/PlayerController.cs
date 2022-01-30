@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float velUp = 3, velDownDiff = 0.2f;
     private float vel, jumpPos, posIni, posUp, velDown;
     private int aux = 1;
-    private int  maxLifes, currentLifes, minLifes, animCont;
+    private int maxLifes, currentLifes, minLifes, animCont;
     private GameManager gameManager;
 
     // Start is called before the first frame update
@@ -29,14 +29,19 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         velDown = velUp + velDownDiff;
         vel = velUp;
-        animCont = 3;
+        //animCont = 3;
         //live = 3;
+    }
+    private void OnEnable()
+    {if (bad) animCont = 0;
+        else animCont = 3;
     }
 
     public void SetLifesLimit(int max)
     {
         maxLifes = max;
         currentLifes = max;
+        UpdateAnim();
 
     }
 
@@ -45,6 +50,7 @@ public class PlayerController : MonoBehaviour
         maxLifes = max;
         minLifes = min;
         currentLifes = 0;
+        UpdateAnim();
     }
 
     public void SetPosition(Vector3 pos)
@@ -67,7 +73,6 @@ public class PlayerController : MonoBehaviour
             switch (animCont)
             {
                 case 0:
-                    Debug.Log("En 0");
                     gameObject.GetComponent<Animator>().Play("Walking_3-3");
                     break;
                 case 1:
@@ -178,13 +183,13 @@ public class PlayerController : MonoBehaviour
     public void subLive(int quantity)
     {
         currentLifes += quantity;
-        UpdateAnim();
         if (!bad)
         {
             if (currentLifes < 0)
             {
                 currentLifes = 0;
                 gameManager.HandleLifes(true, currentLifes);
+                //UpdateAnim();
             }
             else if (currentLifes >= maxLifes)
                 currentLifes = maxLifes;
@@ -194,37 +199,51 @@ public class PlayerController : MonoBehaviour
             if (currentLifes <= -minLifes)
             {
                 currentLifes = minLifes;
-                Debug.Log("Dah");
+                //UpdateAnim();
                 gameManager.HandleLifes(false, -currentLifes);
             }
             else if (currentLifes >= maxLifes)
             {
                 currentLifes = maxLifes;
+                //UpdateAnim();
                 gameManager.HandleLifes(false, currentLifes);
             }
         }
+        UpdateAnim();
     }
 
     public void Fall()
     {
-        gameObject.GetComponent<Animator>().Play("Fall_3-3");
+        if (bad)
+            gameObject.GetComponent<Animator>().Play("Fall_3-3");
+        else
+            gameObject.GetComponent<Animator>().Play("Fall_Animation");
     }
 
     private void UpdateAnim()
     {
         if (!bad)
         {
-            float aux = maxLifes/4.0f ;
-            aux *= currentLifes;
-            animCont = (int)aux;
+            if (currentLifes == maxLifes)
+                animCont = 3;
+            else
+            {
+                float aux = maxLifes / 3.0f;
+                aux *= currentLifes;
+                animCont = (int)aux;
+            }
         }
-        else if (bad && currentLifes < 0)
-        {
-            float aux =  minLifes/4.0f;
-            aux *= currentLifes;
-            animCont = (int)aux;
+        else if (bad && currentLifes > 0)
+        {if (currentLifes == maxLifes)
+                animCont = 3;
+            else
+            {
+                float aux = minLifes / 3.0f;
+                aux *= currentLifes;
+                animCont = (int)aux;
+            }
         }
-            Debug.Log("V: " + currentLifes + "Anim: " +animCont);
+        Debug.Log("V: " + currentLifes + "Anim: " + animCont);
     }
     public int LiveGetter() { return currentLifes; }
     public void LiveSetter(int _live) { currentLifes = _live; }

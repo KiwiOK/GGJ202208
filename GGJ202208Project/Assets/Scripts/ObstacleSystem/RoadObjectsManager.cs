@@ -77,7 +77,7 @@ public class RoadObjectsManager : MonoBehaviour
 
     private void ChangeRangeValues()
     {
-        Debug.Log(_globalTimer);
+        //Debug.Log(_globalTimer);
 
         if (_globalTimer > 60)
         {
