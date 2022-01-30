@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            playerBad.GetComponent<PlayerController>().Fall();
             playerBad.transform.position = new Vector3(playerGood.transform.position.x, -playerGood.transform.position.y, -playerGood.transform.position.z);
             playerGood.SetActive(false);
             playerBad.SetActive(true);
