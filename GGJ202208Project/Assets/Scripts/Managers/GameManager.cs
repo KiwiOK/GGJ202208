@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             if (vidas > 0)
                 ChangeSide();
             else
-                SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+                SceneManager.LoadScene("Pajarito", LoadSceneMode.Single);
         }
     }
 }

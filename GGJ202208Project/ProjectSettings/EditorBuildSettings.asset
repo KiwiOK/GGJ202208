@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 21d830779b4474149b63d2bc8cda2137
+  - enabled: 1
+    path: Assets/Scenes/Pajarito.unity
+    guid: 7395b70403ba8d14aa8968928814a26f
   m_configObjects: {}
