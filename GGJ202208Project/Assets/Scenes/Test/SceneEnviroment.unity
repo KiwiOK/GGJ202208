@@ -1269,7 +1269,7 @@ GameObject:
   - component: {fileID: 422620648}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1365,6 +1365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollX: 0.5
   ScrollY: 0.5
+  start: 0
 --- !u!1 &461206066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8782206318545749928, guid: a4a431ab6fde902418f0acbec16616ff, type: 3}
@@ -1406,7 +1407,7 @@ GameObject:
   - component: {fileID: 477508699}
   m_Layer: 0
   m_Name: Plane (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1439,6 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollX: 0.5
   ScrollY: 0.5
+  start: 0
 --- !u!64 &477508700
 MeshCollider:
   m_ObjectHideFlags: 0
