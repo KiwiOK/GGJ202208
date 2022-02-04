@@ -14,11 +14,13 @@ public class GameManager : MonoBehaviour
     private GameObject playerBad;
     private Camera mainCam;
     private GameObject canvas, obstacleSpawner, enviromentManager;
+    private GameObject [] floor;
 
     bool goodSide = true;
     // Start is called before the first frame update
     void Start()
     {
+        floor = GameObject.FindGameObjectsWithTag("Floor");
         mainCam = Camera.main;
         canvas = FindObjectOfType<BackgroundSwitch>().gameObject;
         NewRandomLifesLimit();
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
         obstacleSpawner.GetComponent<RoadObjectsManager>().IsPlatformFlipped = !goodSide;
         enviromentManager.GetComponent<EnviromentSystemManager>().IsPlatformFlipped = !goodSide;
         ChangePlayer();
+        floor[1].GetComponent<FloorScroll>().SendMessage("pasotiempo");
 
     }
     private void ChangePlayer()
